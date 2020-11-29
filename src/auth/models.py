@@ -11,7 +11,7 @@ class User(Base):
     email = Column(String, unique=True)
     password = Column(String)
     is_active = Column(Boolean, default=True)
-    profile = relationship('Profile', uselist=False, back_populates='user')
+    profile = relationship('Profile', uselist=False, back_populates='user', cascade="all, delete")
 
 
 class Profile(Base):
@@ -21,4 +21,6 @@ class Profile(Base):
     user_id = Column(Integer, ForeignKey('users.id'))
     user = relationship('User', back_populates='profile')
 
-    username = Column(String(20), unique=True)
+    name = Column(String(30), default='')
+    surname = Column(String(30), default='')
+    avatar_url = Column(String, default='')  
